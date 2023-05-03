@@ -16,8 +16,8 @@ public class BedWars {
         instance = this;
 
         this.launcher = launcher;
-        this.teamManager = new TeamManager();
         this.locationManager = new LocationManager();
+        this.teamManager = new TeamManager();
     }
 
     public LocationManager getLocationManager() {

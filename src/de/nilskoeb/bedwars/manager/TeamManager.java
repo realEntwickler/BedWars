@@ -17,6 +17,12 @@ public class TeamManager {
         teams.add(new ITeam("§9Blau", 2, Color.BLUE));
         teams.add(new ITeam("§eGelb", 2, Color.YELLOW));
         teams.add(new ITeam("§aGrün", 2, Color.GREEN));
+
+        checkForTeamSpawns();
+    }
+
+    private void checkForTeamSpawns() {
+        //TODO
     }
 
     public ITeam getTeam (Player player) {
