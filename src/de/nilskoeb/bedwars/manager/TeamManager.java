@@ -13,11 +13,10 @@ public class TeamManager {
     public TeamManager() {
         this.teams = new ArrayList<>();
 
-        teams.add(new ITeam("§cRot", 2, Color.RED));
-        teams.add(new ITeam("§9Blau", 2, Color.BLUE));
-        teams.add(new ITeam("§eGelb", 2, Color.YELLOW));
-        teams.add(new ITeam("§aGrün", 2, Color.GREEN));
-
+        teams.add(new ITeam("§cRot", 4, Color.RED));
+        teams.add(new ITeam("§9Blau", 4, Color.BLUE));
+        teams.add(new ITeam("§eGelb", 4, Color.YELLOW));
+        teams.add(new ITeam("§aGrün", 4, Color.GREEN));
     }
 
     public ITeam getTeam (Player player) {

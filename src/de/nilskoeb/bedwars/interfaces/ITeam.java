@@ -14,11 +14,21 @@ public class ITeam {
     private final Color teamColor;
     private Location teamSpawn;
     private ArrayList<Player> players;
+    private boolean eliminated;
 
     public ITeam(String displayname, int maxPlayers, Color teamColor) {
         this.displayname = displayname;
         this.maxPlayers = maxPlayers;
         this.teamColor = teamColor;
+        this.eliminated = false;
+    }
+
+    public boolean isEliminated() {
+        return eliminated;
+    }
+
+    public void setEliminated(boolean eliminated) {
+        this.eliminated = eliminated;
     }
 
     public void setTeamSpawn(Location teamSpawn) {
