@@ -27,8 +27,6 @@ public class BedWars {
         this.gameStateManager = new GameStateManager();
 
         launcher.getCommand("map").setExecutor(new MapCommand());
-
-
     }
 
     public GameStateManager getGameStateManager() {
