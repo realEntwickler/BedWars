@@ -69,6 +69,17 @@ public class MapManager {
         }
     }
 
+    public void addMap (String name, Material material, byte data) {
+        List<String> savedMaps = getYamlConfiguration().getStringList("maps");
+        savedMaps.add(name + ":" + material.toString() + ":" + data);
+        getYamlConfiguration().set("maps", savedMaps);
+        try {
+            getYamlConfiguration().save(configFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public IMap getSelectedMap() {
         return selectedMap;
     }

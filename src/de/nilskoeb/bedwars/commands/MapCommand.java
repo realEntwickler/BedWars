@@ -4,6 +4,7 @@ import de.nilskoeb.bedwars.BedWars;
 import de.nilskoeb.bedwars.interfaces.IMap;
 import de.nilskoeb.bedwars.utilities.$;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.command.Command;
@@ -49,7 +50,28 @@ public class MapCommand implements CommandExecutor {
                     commandSender.sendMessage($.PREFIX + "Bitte beachte die §eBenutzung §7dieses Kommandos.");
                     break;
             }
-        }
-        return false;
+        } else if (strings.length == 4) {
+            if (!strings[0].equalsIgnoreCase("add")) {
+                commandSender.sendMessage($.PREFIX + "Bitte beachte die §eBenutzung §7dieses Kommandos.");
+                return true;
+            }
+
+            if (BedWars.getInstance().getMapManager().getMaps().stream().filter(filter -> filter.getName().equalsIgnoreCase(strings[1])).findFirst().orElse(null) != null) {
+                commandSender.sendMessage($.PREFIX + "Die angegebene Map existiert §cbereits§7.");
+                return true;
+            }
+            Material material = Material.getMaterial(strings[2]);
+
+            if (material == null) {
+                commandSender.sendMessage($.PREFIX + "Das angegebene Material wurde §cnicht §7gefunden.");
+                return true;
+            }
+
+            BedWars.getInstance().getMapManager().addMap(strings[1], material, Byte.parseByte(strings[3]));
+            BedWars.getInstance().getMapManager().setupMaps();
+            commandSender.sendMessage($.PREFIX + "Du hast die Map §e" + strings[1] + " §7erfolgreich angelegt.");
+        } else
+            commandSender.sendMessage($.PREFIX + "Bitte beachte die §eBenutzung §7dieses Kommandos.");
+        return true;
     }
 }
