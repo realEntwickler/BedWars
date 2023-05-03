@@ -2,6 +2,8 @@ package de.nilskoeb.bedwars;
 
 import de.nilskoeb.bedwars.commands.MapCommand;
 import de.nilskoeb.bedwars.launcher.Launcher;
+import de.nilskoeb.bedwars.listener.PlayerJoinListener;
+import de.nilskoeb.bedwars.listener.PlayerQuitListener;
 import de.nilskoeb.bedwars.manager.GameStateManager;
 import de.nilskoeb.bedwars.manager.LocationManager;
 import de.nilskoeb.bedwars.manager.MapManager;
@@ -27,6 +29,8 @@ public class BedWars {
         this.gameStateManager = new GameStateManager();
 
         launcher.getCommand("map").setExecutor(new MapCommand());
+        launcher.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), launcher);
+        launcher.getServer().getPluginManager().registerEvents(new PlayerQuitListener(), launcher);
     }
 
     public GameStateManager getGameStateManager() {
