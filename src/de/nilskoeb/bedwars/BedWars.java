@@ -1,5 +1,6 @@
 package de.nilskoeb.bedwars;
 
+import de.nilskoeb.bedwars.commands.AddMapCommand;
 import de.nilskoeb.bedwars.launcher.Launcher;
 import de.nilskoeb.bedwars.manager.LocationManager;
 import de.nilskoeb.bedwars.manager.MapManager;
@@ -21,6 +22,8 @@ public class BedWars {
         this.locationManager = new LocationManager();
         this.teamManager = new TeamManager();
         this.mapManager = new MapManager();
+
+        launcher.getCommand("map").setExecutor(new MapCommand());
     }
 
     public MapManager getMapManager() {
