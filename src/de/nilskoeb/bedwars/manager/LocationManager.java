@@ -49,8 +49,8 @@ public class LocationManager {
             y = configuration.getDouble("y");
             z = configuration.getDouble("z");
 
-            yaw = configuration.getFloatList("yaw").get(0);
-            pitch = configuration.getFloatList("pitch").get(0);
+            yaw = (float) configuration.get("yaw", Float.class);
+            pitch = (float) configuration.get("pitch", Float.class);
 
             return new Location(Bukkit.getWorld(configuration.getString("world")), x, y, z, yaw, pitch);
         } else
