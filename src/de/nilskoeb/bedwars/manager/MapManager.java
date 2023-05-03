@@ -15,6 +15,7 @@ public class MapManager {
 
     private final File dataFolder;
     private final File configFile;
+    private final YamlConfiguration yamlConfiguration;
     private ArrayList<IMap> maps;
     private IMap selectedMap;
 
@@ -36,6 +37,7 @@ public class MapManager {
                 throw new RuntimeException(e);
             }
         }
+        this.yamlConfiguration = YamlConfiguration.loadConfiguration(configFile);
 
         setupMaps();
     }
@@ -43,7 +45,7 @@ public class MapManager {
     public void setupMaps() {
         maps.clear();
         selectedMap = null;
-        List<String> savedMaps = getYamlConfiguration().getStringList("maps");
+        List<String> savedMaps = yamlConfiguration.getStringList("maps");
 
         if (savedMaps != null && savedMaps.size() > 0) {
             savedMaps.forEach(map -> {
@@ -54,27 +56,23 @@ public class MapManager {
             System.out.printf($.PREFIX + "Es wurden keine Maps registriert!");
     }
 
-    private YamlConfiguration getYamlConfiguration() {
-        return YamlConfiguration.loadConfiguration(configFile);
-    }
-
     public void deleteMap (IMap map) {
-        List<String> savedMaps = getYamlConfiguration().getStringList("maps");
+        List<String> savedMaps = yamlConfiguration.getStringList("maps");
         savedMaps.removeIf(filter -> filter.split(":")[0].equalsIgnoreCase(map.getName()));
-        getYamlConfiguration().set("maps", savedMaps);
+        yamlConfiguration.set("maps", savedMaps);
         try {
-            getYamlConfiguration().save(configFile);
+            yamlConfiguration.save(configFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void addMap (String name, Material material, byte data) {
-        List<String> savedMaps = getYamlConfiguration().getStringList("maps");
+        List<String> savedMaps = yamlConfiguration.getStringList("maps");
         savedMaps.add(name + ":" + material.toString() + ":" + data);
-        getYamlConfiguration().set("maps", savedMaps);
+        yamlConfiguration.set("maps", savedMaps);
         try {
-            getYamlConfiguration().save(configFile);
+            yamlConfiguration.save(configFile);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
