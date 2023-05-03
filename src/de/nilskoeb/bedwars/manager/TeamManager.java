@@ -8,15 +8,15 @@ import java.util.ArrayList;
 
 public class TeamManager {
 
-    private ArrayList<ITeam> teams;
+    private final ArrayList<ITeam> teams;
 
     public TeamManager() {
         this.teams = new ArrayList<>();
 
-        teams.add(new ITeam("§cRot", 1, Color.RED));
-        teams.add(new ITeam("§9Blau", 1, Color.BLUE));
-        teams.add(new ITeam("§eGelb", 1, Color.YELLOW));
-        teams.add(new ITeam("§aGrün", 1, Color.GREEN));
+        teams.add(new ITeam("§cRot", 2, Color.RED));
+        teams.add(new ITeam("§9Blau", 2, Color.BLUE));
+        teams.add(new ITeam("§eGelb", 2, Color.YELLOW));
+        teams.add(new ITeam("§aGrün", 2, Color.GREEN));
     }
 
     public ITeam getTeam (Player player) {
