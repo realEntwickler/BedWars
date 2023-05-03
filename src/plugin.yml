@@ -2,3 +2,5 @@ name: BedWars
 version: 1.0-SNAPSHOT
 author: Nils Kevin Körting-Eberhardt
 main: de.nilskoeb.bedwars.launcher.Launcher
+commands:
+  test:
