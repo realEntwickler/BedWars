@@ -42,17 +42,16 @@ public class LocationManager {
         if (file.exists()) {
             YamlConfiguration configuration = YamlConfiguration.loadConfiguration(file);
 
-            double x, y, z;
-            float yaw, pitch;
+            double x, y, z, yaw, pitch;
 
             x = configuration.getDouble("x");
             y = configuration.getDouble("y");
             z = configuration.getDouble("z");
 
-            yaw = (float) configuration.get("yaw");
-            pitch = (float) configuration.get("pitch");
+            yaw = configuration.getDouble("yaw");
+            pitch = configuration.getDouble("pitch");
 
-            return new Location(Bukkit.getWorld(configuration.getString("world")), x, y, z, yaw, pitch);
+            return new Location(Bukkit.getWorld(configuration.getString("world")), x, y, z, (float) yaw, (float) pitch);
         } else
             return null;
     }
