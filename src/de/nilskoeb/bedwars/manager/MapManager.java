@@ -13,23 +13,19 @@ import java.util.List;
 
 public class MapManager {
 
+    private final File dataFolder;
+    private final File configFile;
     private ArrayList<IMap> maps;
     private IMap selectedMap;
 
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public MapManager() {
+        this.dataFolder = BedWars.getInstance().getLauncher().getDataFolder();
+        this.configFile = new File(dataFolder, "config.yml");
         this.maps = new ArrayList<>();
         this.selectedMap = null;
 
-        setupMaps();
-    }
-
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public void setupMaps() {
-        maps.clear();
-        selectedMap = null;
-
-        File dataFolder = BedWars.getInstance().getLauncher().getDataFolder();
-        File configFile = new File(dataFolder, "config.yml");
         if (!dataFolder.exists())
             dataFolder.mkdirs();
 
@@ -40,8 +36,14 @@ public class MapManager {
                 throw new RuntimeException(e);
             }
         }
-        YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(configFile);
-        List<String> savedMaps = yamlConfiguration.getStringList("maps");
+
+        setupMaps();
+    }
+
+    public void setupMaps() {
+        maps.clear();
+        selectedMap = null;
+        List<String> savedMaps = getYamlConfiguration().getStringList("maps");
 
         if (savedMaps != null && savedMaps.size() > 0) {
             savedMaps.forEach(map -> {
@@ -50,6 +52,21 @@ public class MapManager {
             });
         } else
             System.out.printf($.PREFIX + "Es wurden keine Maps registriert!");
+    }
+
+    private YamlConfiguration getYamlConfiguration() {
+        return YamlConfiguration.loadConfiguration(configFile);
+    }
+
+    public void deleteMap (IMap map) {
+        List<String> savedMaps = getYamlConfiguration().getStringList("maps");
+        savedMaps.removeIf(filter -> filter.split(":")[0].equalsIgnoreCase(map.getName()));
+        getYamlConfiguration().set("maps", savedMaps);
+        try {
+            getYamlConfiguration().save(configFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public IMap getSelectedMap() {

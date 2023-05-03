@@ -1,6 +1,6 @@
 package de.nilskoeb.bedwars;
 
-import de.nilskoeb.bedwars.commands.AddMapCommand;
+import de.nilskoeb.bedwars.commands.MapCommand;
 import de.nilskoeb.bedwars.launcher.Launcher;
 import de.nilskoeb.bedwars.manager.LocationManager;
 import de.nilskoeb.bedwars.manager.MapManager;
